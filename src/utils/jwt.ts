@@ -4,13 +4,13 @@ import { JwtPayloadToken } from "../interfaces/authInterface";
 
 export const generateAccessToken = (payload: JwtPayloadToken) => {
    return jwt.sign(payload, env.JWT_SECRET, {
-      expiresIn: env.JWT_ACCESS_EXPIRY,
+      expiresIn: '15m',
    });
 };
 
 export const generateRefreshToken = (payload: JwtPayloadToken) => {
    return jwt.sign(payload, env.JWT_REFRESH_SECRET, {
-      expiresIn: env.JWT_REFRESH_EXPIRY,
+      expiresIn: '7d',
    });
 };
 
