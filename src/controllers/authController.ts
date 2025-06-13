@@ -456,3 +456,34 @@ export async function sendEmailTesting(
       next(error);
    }
 }
+
+export async function helloWord(
+   req: Request,
+   res: Response,
+   next: NextFunction
+) {
+   try {
+      const response = {
+         word: "Hello World"
+      }
+      // logger.info("user data created", response);
+      successResponse(res, 200, response, null);
+   } catch (error) {
+      // Logging berdasarkan jenis error
+      if (error instanceof AppError) {
+         logger.warn(`[AppError in helloWord]: ${error.message}`);
+      } else if (error instanceof Error) {
+         logger.error(
+            `[Unexpected Error in helloWord]: ${error.message}`,
+            {
+               stack: error.stack,
+            }
+         );
+      } else {
+         logger.error(
+            `[Unknown Error in helloWord]: ${JSON.stringify(error)}`
+         );
+      }
+      next(error);
+   }
+}

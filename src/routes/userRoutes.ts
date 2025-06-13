@@ -19,6 +19,11 @@ import * as userController from "../controllers/authController";
 
 const router = express.Router();
 
+router.get(
+   "/hello",
+   
+)
+
 router.post(
    "/login",
    validateRequest({ body: loginSchema }),
