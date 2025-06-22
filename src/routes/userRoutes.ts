@@ -43,8 +43,8 @@ router.post(
 
 router.post(
    "/register-admin-disdik",
-   authMiddleware,
-   roleMiddleware(["adminDisdik", "superAdmin"]),
+   // authMiddleware,
+   // roleMiddleware(["adminDisdik", "superAdmin"]),
    validateRequest({ body: registerAdminDisdikSchema }),
    userController.registerAdminDisdik
 );
