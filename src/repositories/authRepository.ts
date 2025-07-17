@@ -120,6 +120,11 @@ export class userRepository {
                select: {
                   nama: true
                }
+            },
+            sekolah: {
+               select: {
+                  sekolah_nama: true
+               }
             }
          },
       });

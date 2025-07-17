@@ -257,14 +257,35 @@ export class userService {
 
    static async verifyUsernameAndSendEmail(username: string): Promise<boolean> {
       const user: UserWithRole | null = await userRepository.findUserByUsername(username)
-      if(!user) {
-         throw new AppError("Username does not exist", 400)
+      if (!user) {
+         throw new AppError("Username tidak ditemukan pada database", 404)
       }
-      if(!user.siswa) {
-         throw new AppError("Tidak ada siswa yang terkait dengan akun", 400)
+      let name = "User"
+      const role = user.role.role_nama.toLowerCase()
+      switch (role) {
+         case "siswa":
+            if (!user.siswa) {
+               throw new AppError("Tidak ada siswa yang terkait dengan akun", 404)
+            }
+            name = user.siswa.nama
+            break;
+         case "adminsd":
+         case "adminsmp":
+            if (!user.sekolah) {
+               throw new AppError("Tidak ada sekolah yang terkait dengan akun", 404)
+            }
+            name = user.sekolah.sekolah_nama
+            break;
+         case "admindisdik": 
+            name = "Admin Dinas Pendidikan"
+            break;
+         default:
+            name = "Super Admin"
+            break;
       }
+      
       const token = generateTokenSetPassword(user.user_id)
-      const message = await this.sendResetPasswordLink(user.username, token, user.siswa.nama)
+      const message = await this.sendResetPasswordLink(user.username, token, `${name}`)
       return message
    }
 

@@ -34,6 +34,11 @@ const userWithRole = Prisma.validator<Prisma.UserDefaultArgs>()({
         select: {
             nama: true
         }
+       },
+       sekolah: {
+        select: {
+            sekolah_nama: true
+        }
        }
     },
  });
