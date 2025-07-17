@@ -124,7 +124,7 @@ export async function login(req: Request, res: Response, next: NextFunction) {
       res.cookie("refresh_token", refresh_token, {
          httpOnly: true,
          secure: process.env.NODE_ENV === "production",
-         sameSite: process.env.NODE_ENV === "production" ? "strict" : "lax",
+         sameSite: "none",
          maxAge: 7 * 24 * 60 * 60 * 1000,
       });
 
