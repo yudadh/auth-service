@@ -135,7 +135,7 @@ export class userService {
    }
 
    static async sendResetPasswordLink(toEmail: string, token: string, name: string): Promise<boolean> {
-      const link = `http://localhost:5173/set-password?token=${token}`
+      const link = `${process.env.FRONTEND_URL}/set-password?token=${token}`
       const subject = 'Set Password Akun Anda'
       // const html = `
       // <p>Klik link berikut untuk mengubah password Anda:</p>
